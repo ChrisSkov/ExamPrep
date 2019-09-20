@@ -113,7 +113,7 @@ public class Facade {
         EntityManager em = getEntityManager();
         try
         {
-            return (Customer) em.createQuery("SELECT m FROM Customer m WHERE m.id =: id").setParameter("id", id).getSingleResult();
+            return (Customer) em.createQuery("SELECT m FROM Customer m WHERE m.id =:id").setParameter("id", id).getSingleResult();
         } finally
         {
             em.close();
@@ -184,7 +184,7 @@ public class Facade {
         return item;
     }
 
-    public OrderToRuleThemAll addOrder(int id) throws Exception
+    public OrderToRuleThemAll addOrder(int id)
     {
         OrderToRuleThemAll order = new OrderToRuleThemAll();
         EntityManager em = emf.createEntityManager();
@@ -196,14 +196,11 @@ public class Facade {
             em.persist(order);
             em.getTransaction().commit();
             return order;
-        } catch (Exception e)
-        {
-            e.printStackTrace();
         } finally
         {
             em.close();
         }
-        return order;
+
     }
 
     public ItemType getItemTypeByName(String name) throws Exception

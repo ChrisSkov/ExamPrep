@@ -32,6 +32,6 @@ public class Tester {
         System.out.println(facade.getAllCustomers());
         Customer cus = facade.getCustomerById(1);
         System.out.println(cus.getName());
-        //OrderToRuleThemAll order = facade.addOrder(1);
+        OrderToRuleThemAll order = facade.addOrder(1);
     }
 }
