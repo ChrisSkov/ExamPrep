@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 /**
@@ -17,61 +18,50 @@ import javax.persistence.NamedQuery;
  * @author stoff
  */
 @Entity
-@NamedQuery(name = "ItemType.deleteAllRows", query = "DELETE from ItemType")
-public class ItemType implements Serializable {
+@NamedQuery(name = "OrderToRuleThemAll.deleteAllRows", query = "DELETE from OrderToRuleThemAll")
+public class OrderToRuleThemAll implements Serializable {
 
+    @ManyToOne
+    private Customer customer;
+
+    public Customer getCustomer()
+    {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
+    }
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String description;
-    private int price;
-
-    public ItemType()
+    private int orderID;
+    
+    public OrderToRuleThemAll()
     {
+        
     }
-
-    public ItemType(String name, String description, int price)
-    {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public String getDescription()
-    {
-        return description;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    public int getPrice()
-    {
-        return price;
-    }
-
-    public void setPrice(int price)
-    {
-        this.price = price;
-    }
-
     public Integer getId()
     {
         return id;
+    }
+
+    public int getOrderID()
+    {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID)
+    {
+        this.orderID = orderID;
+    }
+
+    public OrderToRuleThemAll(int orderID)
+    {
+        this.orderID = orderID;
     }
 
     public void setId(Integer id)
@@ -91,11 +81,11 @@ public class ItemType implements Serializable {
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ItemType))
+        if (!(object instanceof OrderToRuleThemAll))
         {
             return false;
         }
-        ItemType other = (ItemType) object;
+        OrderToRuleThemAll other = (OrderToRuleThemAll) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
         {
             return false;
@@ -106,7 +96,7 @@ public class ItemType implements Serializable {
     @Override
     public String toString()
     {
-        return "entities.ItemType[ id=" + id + " ]";
+        return "entity.Order[ id=" + id + " ]";
     }
-
+    
 }

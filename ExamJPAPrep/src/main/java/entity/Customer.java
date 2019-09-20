@@ -1,16 +1,38 @@
-package entities;
+package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
-@NamedQuery(name = "Customer.deleteAllRows", query = "DELETE from Customer")
+@NamedQueries(
+{
+    @NamedQuery(name = "Customer.deleteAllRows", query = "DELETE from Customer"),
+    @NamedQuery(name = "Customer.getAll", query = "SELECT r from Customer r")
+})
+
 public class Customer implements Serializable {
 
+    @OneToMany (mappedBy = "customer")
+    private List<OrderToRuleThemAll> orders = new ArrayList();
+
+    public List<OrderToRuleThemAll> getOrders()
+    {
+        return orders;
+    }
+
+    public void setOrders(OrderToRuleThemAll order)
+    {
+        this.orders.add(order);
+    }
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,5 +80,4 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
- 
 }
